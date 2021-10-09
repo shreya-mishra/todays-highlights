@@ -3,18 +3,27 @@ import {
   MaterialCommunityIcons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { NewsContext } from "../API/Context";
 
 const TopNavigation = ({ index, setIndex }) => {
+  const { darkTheme, setDarkTheme, fetchNews } = useContext(NewsContext);
+
   return (
-    <View style={{ ...styles.container, backgroundColor: "#282c35" }}>
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor: darkTheme ? "#282C35" : "white",
+      }}>
       {index === 0 ? (
-        <TouchableOpacity style={styles.left}>
+        <TouchableOpacity
+          style={styles.left}
+          onPress={() => setDarkTheme(!darkTheme)}>
           <Text
             style={{
               ...styles.text,
-              color: "lightgrey",
+              color: darkTheme ? "lightgrey" : "black",
             }}>
             <MaterialCommunityIcons
               name='theme-light-dark'
@@ -31,13 +40,13 @@ const TopNavigation = ({ index, setIndex }) => {
           <Text
             style={{
               ...styles.text,
-              color: "lightgrey",
+              color: darkTheme ? "lightgrey" : "black",
             }}>
             Discover
           </Text>
         </TouchableOpacity>
       )}
-      <Text style={{ ...styles.center, color: "white" }}>
+      <Text style={{ ...styles.center, color: darkTheme ? "white" : "black" }}>
         {index ? "All News" : "Discover"}
       </Text>
       {index ? (
@@ -52,7 +61,10 @@ const TopNavigation = ({ index, setIndex }) => {
         <TouchableOpacity
           style={styles.left}
           onPress={() => setIndex(index === 0 ? 1 : 0)}>
-          <Text style={{ ...styles.text, color: "white" }}>All News</Text>
+          <Text
+            style={{ ...styles.text, color: darkTheme ? "white" : "black" }}>
+            All News
+          </Text>
           <SimpleLineIcons name='arrow-right' size={15} color='#007FFF' />
         </TouchableOpacity>
       )}

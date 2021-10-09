@@ -7,6 +7,7 @@ import SingleNews from "../components/SingleNews";
 const NewsScreen = () => {
   const {
     news: { articles },
+    darkTheme,
   } = useContext(NewsContext);
   const [activeIndex, setActiveIndex] = useState();
 
@@ -24,7 +25,7 @@ const NewsScreen = () => {
           itemHeight={windowHeight}
           vertical={true}
           renderItem={({ item, index }) => (
-            <SingleNews item={item} index={index} />
+            <SingleNews item={item} index={index} darkTheme={darkTheme} />
           )}
           onSnapToItem={(index) => setActiveIndex(index)}
         />
